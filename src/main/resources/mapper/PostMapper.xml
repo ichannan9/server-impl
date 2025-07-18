@@ -1,0 +1,31 @@
+<!-- PostMapper.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.boardservice.mapper.PostMapper">
+
+    <select id="findAll" resultType="com.koreait.boardservice.domain.Post">
+        SELECT * FROM post
+    </select>
+
+    <select id="findById" resultType="com.koreait.boardservice.domain.Post">
+        SELECT * FROM post WHERE id = #{id}
+    </select>
+
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO post(member_id, title, content, created_at)
+        VALUES (#{memberId}, #{title}, #{content}, NOW())
+    </insert>
+
+    <update id="updatePost">
+        UPDATE post
+        SET title = #{title},
+            content = #{content},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deletePost">
+        DELETE FROM post WHERE id = #{id}
+    </delete>
+
+</mapper>
